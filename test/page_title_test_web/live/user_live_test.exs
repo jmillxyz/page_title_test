@@ -118,11 +118,12 @@ defmodule PageTitleTestWeb.UserLiveTest do
 
       assert_patch(show_live, ~p"/users/#{user}/show/edit")
 
+      # succeeds after a patch
       assert page_title(show_live) =~ "Edit User: #{user.name}"
 
       {:ok, show_edit_live, _html} = live(conn, ~p"/users/#{user}/show/edit")
 
-      # succeeds, but why is this different?
+      # succeeds, but requires escaping
       assert page_title(show_edit_live) =~
                "Edit User: #{user.name}"
                |> Phoenix.HTML.html_escape()
